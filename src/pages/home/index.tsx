@@ -28,18 +28,19 @@ interface DataProp {
 export function Home() {
     const [input, setInput] = useState("");
     const [coins, setCoins] = useState<CoinProps[]>([]);
+    const [offset, setOffset] = useState(0);
     const navigate = useNavigate();
 
     useEffect(() => {
         getData();
-    }, [])
+    }, [offset])
 
     async function getData() {
-        fetch(`https://rest.coincap.io/v3/assets?limit=10&offset=0&apiKey=${import.meta.env.VITE_SECRET_KEY}`)
+        fetch(`https://rest.coincap.io/v3/assets?limit=10&offset=${offset}&apiKey=${import.meta.env.VITE_SECRET_KEY}`)
             .then(response => response.json())
             .then((data: DataProp) => {
                 const coinsData = data.data;
-               
+
                 const priceCompact = new Intl.NumberFormat('en-US', {
                     style: 'currency',
                     currency: 'USD',
@@ -51,25 +52,31 @@ export function Home() {
                         ...item,
                         formatedMarket: priceCompact.format(Number(item.marketCapUsd)),
                         formatedPrice: priceCompact.format(Number(item.priceUsd)),
-                        formatedVolume: priceCompact.format(Number(item.volumeUsd24Hr)),
+                        formatedVolume: priceCompact.format(Number(item.volumeUsd24Hr))
                     }
                     return formated;
                 })
 
-                setCoins(formatedResult);
+                const listCoins = [...coins, ...formatedResult];
+                
+                setCoins(listCoins);
             })
     }
 
     function handleSearch(e: FormEvent) {
         e.preventDefault();
-      
+
         if (!input) return;
 
         navigate(`/detail/${input}`);
     }
 
     function handleGetMore() {
-        console.log("Carregar mais...");
+        if (offset == 0) {
+            setOffset(10);
+            return;
+        }
+        setOffset(offset + 10);
     }
 
     return (
