@@ -3,7 +3,7 @@ import styles from "./home.module.css"
 import { BsSearch } from 'react-icons/bs';
 import { Link, useNavigate } from "react-router-dom";
 
-interface CoinProps {
+export interface CoinProps {
     id: string;
     name: string;
     symbol: string;
@@ -41,6 +41,11 @@ export function Home() {
             .then((data: DataProp) => {
                 const coinsData = data.data;
 
+                const price = new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                })
+
                 const priceCompact = new Intl.NumberFormat('en-US', {
                     style: 'currency',
                     currency: 'USD',
@@ -51,14 +56,14 @@ export function Home() {
                     const formated = {
                         ...item,
                         formatedMarket: priceCompact.format(Number(item.marketCapUsd)),
-                        formatedPrice: priceCompact.format(Number(item.priceUsd)),
+                        formatedPrice: price.format(Number(item.priceUsd)),
                         formatedVolume: priceCompact.format(Number(item.volumeUsd24Hr))
                     }
                     return formated;
                 })
 
                 const listCoins = [...coins, ...formatedResult];
-                
+
                 setCoins(listCoins);
             })
     }
