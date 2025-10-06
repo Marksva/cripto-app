@@ -55,13 +55,13 @@ Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
 
 ```env
 VITE_API_URL=https://rest.coincap.io/v3/assets
-VITE_API_KEY=sua_chave_api_aqui
+VITE_SECRET_KEY=sua_chave_api_aqui
 ```
 
 | Variável | Descrição |
 |----------|-----------|
 | VITE_API_URL | URL base da API de criptomoedas |
-| VITE_API_KEY | Chave de API para autenticação |
+| VITE_SECRET_KEY | Chave de API para autenticação |
 
 > Nota: Certifique-se de nunca compartilhar suas chaves de API reais no controle de versão. O arquivo `.env` já está incluído no `.gitignore`.
 
