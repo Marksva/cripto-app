@@ -36,7 +36,7 @@ export function Home() {
     }, [offset])
 
     async function getData() {
-        fetch(`https://rest.coincap.io/v3/assets?limit=10&offset=${offset}&apiKey=${import.meta.env.VITE_SECRET_KEY}`)
+        fetch(`${import.meta.env.VITE_API_URL}?limit=10&offset=${offset}&apiKey=${import.meta.env.VITE_SECRET_KEY}`)
             .then(response => response.json())
             .then((data: DataProp) => {
                 const coinsData = data.data;

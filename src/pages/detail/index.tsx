@@ -22,7 +22,7 @@ export function Detail() {
     useEffect(() => {
         async function getCoin() {
             try {
-                fetch(`https://rest.coincap.io/v3/assets/${cripto}?apiKey=${import.meta.env.VITE_SECRET_KEY}`)
+                fetch(`${import.meta.env.VITE_API_URL}/${cripto}?apiKey=${import.meta.env.VITE_SECRET_KEY}`)
                     .then(response => response.json())
                     .then((data: DataProps) => {
 
