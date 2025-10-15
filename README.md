@@ -4,6 +4,9 @@
 
 Esta aplicação fornece uma interface intuitiva para acompanhar e visualizar informações sobre criptomoedas, consumindo dados em tempo real da API CoinCap. Possui um design responsivo com um layout limpo, oferecendo tanto uma visão geral abrangente quanto detalhes específicos para criptomoedas individuais, incluindo preços atualizados, capitalização de mercado, volume de negociação e outras métricas importantes fornecidas pela API CoinCap.
 
+## Deploy do projeto
+- https://cripto-app-azure-xi.vercel.app/
+
 ## 🛠️ Tecnologias
 
 - React com TypeScript
